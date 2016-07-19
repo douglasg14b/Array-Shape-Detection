@@ -10,19 +10,29 @@ namespace Array_Shape_Detection
     {
         public Shape()
         {
-            points = new List<Point>();
+            Points = new List<Point>();
         }
 
-        List<Point> points;
+        public List<Point> Points { get; private set; }
 
-        public void AddPoint(Point point)
+
+        public void AddPoint(Point point, bool sort)
         {
-            points.Add(point);
+            if (sort)
+            {
+                Points.Add(point);
+                SortPoints();
+            }
+            else
+            {
+                Points.Add(point);
+            }
         }
+
 
         public void SortPoints()
         {
-
+            Points = Points.OrderBy(x => x.X).ThenBy(x => x.Y).ToList();
         }
     }
 }

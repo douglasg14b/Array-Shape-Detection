@@ -21,30 +21,29 @@ namespace Array_Shape_Detection
 
         public void ParseTable()
         {
-            var firstCorner = false;
-            var nonEmptyPoints = new List<Point>();
+            var shapes = new List<Shape>();
             for(int y = 0; y < matrix.Length; y++)
             {
                 for(int x = 0; x < matrix[y].Length; x++)
                 {
                     if (IsValue(matrix[y][x]))
                     {
-                        if (!firstCorner)
-                        {
-                            firstCorner = true;
-
-                        }
-                        Console.WriteLine("Session");
-                        List<Point> points = new List<Point>();
-                        FindShapes(x, y, points);
-                        PrintListOfPoints(points);
+                        Shape newShape = new Shape();
+                        FindShapes(x, y, newShape);
+                        shapes.Add(newShape); 
                     }
                 }
+            }
+
+            foreach(Shape shape in shapes)
+            {
+                Console.WriteLine("Shape:");
+                PrintListOfPoints(shape.Points);
             }
             
         }
 
-        public void FindShapes(int x, int y, List<Point> points)
+        public void FindShapes(int x, int y, Shape shape)
         {
             if(x < 0 || y < 0 || y >= matrix.Length || x >= matrix[y].Length)
             {
@@ -54,12 +53,12 @@ namespace Array_Shape_Detection
             if(IsValue(matrix[y][x]))
             {
                 matrix.SetItem(x, y, 0);
-                points.Add(new Point(x, y));
+                shape.AddPoint(new Point(x, y), true);
 
-                FindShapes(x, y - 1, points);
-                FindShapes(x, y + 1, points);
-                FindShapes(x - 1, y, points);
-                FindShapes(x + 1, y, points);
+                FindShapes(x, y - 1, shape);
+                FindShapes(x, y + 1, shape);
+                FindShapes(x - 1, y, shape);
+                FindShapes(x + 1, y, shape);
             }
             return;
         }
