@@ -23,7 +23,7 @@ namespace Array_Shape_Detection
                 new List<int>{0,0,0,0,0,0,0,0,0,0},
                 new List<int>{0,0,0,0,0,0,0,0,0,0},
             });
-            DetectShape shapeDetect = new DetectShape(map, 1);
+            ShapeParser shapeDetect = new ShapeParser(map, 1);
             Console.ReadLine();
         }
     }

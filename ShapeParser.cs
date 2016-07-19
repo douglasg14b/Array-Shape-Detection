@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Array_Shape_Detection
 {
-    public class DetectShape
+    public class ShapeParser
     {
-        public DetectShape(Matrix<int> matrix, int valueToFind)
+        public ShapeParser(Matrix<int> matrix, int valueToFind)
         {
             this.matrix = matrix;
             value = valueToFind;
@@ -43,6 +43,12 @@ namespace Array_Shape_Detection
             
         }
 
+        /// <summary>
+        /// Parses the matrix and finds each unique shape, erases the shape as it's found
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="shape"></param>
         public void FindShapes(int x, int y, Shape shape)
         {
             if(x < 0 || y < 0 || y >= matrix.Length || x >= matrix[y].Length)
@@ -63,11 +69,23 @@ namespace Array_Shape_Detection
             return;
         }
 
+        public void ParseShape(Shape shape)
+        {
+            int maxX = shape.Points.Max(x => x.X);
+            int maxY = shape.Points.Max(x => x.Y);
+            int minX = shape.Points.Min(x => x.X);
+            int minY = shape.Points.Min(x => x.Y);
+
+            //if(shape.ContainsPoint(max))
+
+        }
 
         public bool IsValue(int item)
         {
             return item == value;
         }
+
+
 
         public void PrintListOfPoints(List<Point> points)
         {

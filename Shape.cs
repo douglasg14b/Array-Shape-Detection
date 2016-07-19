@@ -14,7 +14,34 @@ namespace Array_Shape_Detection
         }
 
         public List<Point> Points { get; private set; }
-
+        public int MaxX
+        {
+            get
+            {
+                return Points.Max(x => x.X);
+            }
+        }
+        public int MaxY
+        {
+            get
+            {
+                return Points.Max(x => x.Y);
+            }
+        }
+        public int MinX
+        {
+            get
+            {
+                return Points.Min(x => x.X);
+            }
+        }
+        public int MinY
+        {
+            get
+            {
+                return Points.Min(x => x.Y);
+            }
+        }
 
         public void AddPoint(Point point, bool sort)
         {
@@ -33,6 +60,16 @@ namespace Array_Shape_Detection
         public void SortPoints()
         {
             Points = Points.OrderBy(x => x.X).ThenBy(x => x.Y).ToList();
+        }
+ 
+        public bool ContainsPoint(Point point)
+        {
+            return Points.Contains(point);
+        }
+
+        public bool ContainsPoint(int x, int y)
+        {
+            return Points.Contains(new Point(x,y));
         }
     }
 }
